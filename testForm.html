@@ -1,0 +1,101 @@
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Pharmasso</title>
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="/resources/demos/style.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+    $( function() {
+      $( "#datepicker" ).datepicker();
+    } );
+    </script>
+    <script>
+  $( function() {
+    var medFrequents = [
+      "DOLIPRANE", "EFFERALGAN", "DAFALGAN", "LEVOTHYROX", "IMODIUM", "KARDEGIC", "SPASFON", "ISIMIG", "TAHOR", "SPEDIFEN", "VOLTARENE", "ELUDRIL", "IXPRIM", "PARACETAMOL BIOGARAN", "FORLAX", "MAGNE B6", "HELICIDINE", "CLAMOXYL",
+      "PIASCLEDINE", "LAMALINE", "GAVISCON", "DAFLON", "ANTARENE", "RHINOFLUIMUCIL", "PLAVIX", "MOPRAL", "SUBUTEX", "AERIUS", "ORELOX", "INEXIUM", "METEOSPASMYL", "AUGMENTIN", "TOPLEXIL", "PIVALONE", "VASTAREL", "ADVIL", "EUPANTOL", "DEXERYL", "RENUTRYL", "", "XANAX", "EMLAPATCH", "LASILIX", "ENDOTELON", "DEROXAT", "TEMESTA", "EFFEXOR", "PARACETAMOL SANDOZ", "VENTOLINE", "SOLUPRED", "DEXTROPROPOXYPHENE PARAC BIOG", "PNEUMOREL", "INIPOMP", "PREVISCAN", "ASPEGIC", "GINKOR", "CRESTOR", "MEDIATOR", "SERESTA", "MOTILIUM", "PARACETAMOL MERCK", "CELESTENE", "AMLOR", "DIAMICRON", "TANAKAN", "ATARAX", "DERINOX", "XYZALL", "DEXTROPROPOXYPHENE PARAC SAND", "SERETIDE", "COVERSYL", "PROPOFAN", "HEXAQUINE", "DIFFU-K", "APROVEL", "PARIET", "ZALDIAR", "DIPROSONE", "PARACETAMOL TEVA", "BETADINE", "LYSANXIA", "ALODONT", "LEXOMIL", "DACRYOSERUM", "FUCIDINE", "STILNOX", "KETUM", "STABLON", "ART", "BIOCALYPTOL", "THIOVALONE", "DEBRIDAT", "PYOSTACINE", "TIORFAN", "SPECIAFOLDINE", "OGAST", "RIVOTRIL", "TOPALGIC", "NASONEX", "COAPROVEL"
+    ];
+    $( "#meds" ).autocomplete({
+      source: medFrequents
+    });
+  } );
+  </script>
+</head>
+<body>	
+<form id="foo">
+    <legend>Ajouter un médicament</legend>
+    <br/><label for="bar">Nom utilisateur *</label>
+    <input id="nom" name="nom" type="text" value="" class="required" />
+    <br/><label for="meds">Nom du médicament *</label>
+    <input id="meds" name="medecine" type="text" class="required">
+    <br/><label for="peremption">Date de péremption *</label>
+    <input id="datepicker" name="peremption" type="text" class="required">
+    <br/><input id="ordonance" name="ordonance" type="checkbox"> <label for="ordonance">Sur ordonance</label -->
+    <p>(*) Champs obligatoires</p>
+
+    <input type="submit" value="Send"/>
+</form>
+
+   
+<script>
+// Variable to hold request
+var request;
+// Bind to the submit event of our form
+$("#foo").submit(function(event){
+
+    // Prevent default posting of form - put here to work in case of errors
+    event.preventDefault();
+
+    // Abort any pending request
+    if (request) {
+        request.abort();
+    }
+    // setup some local variables
+    var $form = $(this);
+
+    // Let's select and cache all the fields
+    var $inputs = $form.find("input, select, button, textarea");
+
+    // Serialize the data in the form
+    var serializedData = $form.serialize();
+
+    // Let's disable the inputs for the duration of the Ajax request.
+    // Note: we disable elements AFTER the form data has been serialized.
+    // Disabled form elements will not be serialized.
+    $inputs.prop("disabled", true);
+
+    // Fire off the request to /form.php
+    request = $.ajax({
+        url: "form.php",
+        type: "post",
+        data: serializedData
+    });
+
+    // Callback handler that will be called on success
+    request.done(function (response, textStatus, jqXHR){
+        // Log a message to the console
+        console.log("Hooray, it worked!"+response);
+    });
+
+    // Callback handler that will be called on failure
+    request.fail(function (jqXHR, textStatus, errorThrown){
+        // Log the error to the console
+        console.error(
+            "The following error occurred: "+
+            textStatus, errorThrown
+        );
+    });
+
+    // Callback handler that will be called regardless
+    // if the request failed or succeeded
+    request.always(function () {
+        // Reenable the inputs
+        $inputs.prop("disabled", false);
+    });
+    
+});
+</script>
+</body>
+</html>
