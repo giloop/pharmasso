@@ -39,6 +39,8 @@
     <!-- Formulaire -->
     <section>
       <h2>Ajouter un médicament</h2>
+      <p>Avant de choisir un nom d'utilisateur, vérifiez qu'il n'est pas déjà utilisé dans la liste des médicaments.</p>
+      <p>Il n'est pas nécessaire de remettre votre téléphone et/ou mail si vous l'avez rempli une fois.</p>
       <p><span class="required">(*) Champs obligatoires</span></p>
       <form id="ajout">
       <div class="row uniform 50%">
