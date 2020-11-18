@@ -4,31 +4,26 @@
    *
    * Connect to database
    *
-   * @param    choixId  $choixId choix de la connection 
-   * @return   none
+   * @param    none
+   * @return   dbh $dbh handle to database connection (PDO object)
    *
    */
-  function connectBD($choixId = "local") {
-
+  function connectBD() {
+    $choixId = "local"; /* "mon.site"; /* */
    /* Variables */
    if ($choixId=="local")
-    { $bdd= "test";
-      $host= "localhost";
-      $user= "root";
-      $pass= "";
+    { 
+      $dbh = new PDO('mysql:host=localhost;dbname=test;charset=utf8', 'root', '');
     }
     elseif ($choixId=="mon.site") {
-      $host= "sql.free.fr";
-      $user= "mon.nom";
-      $pass= "m.d.p";
-      $bdd = "ma.base";
+        $dbh = new PDO('mysql:host=mon.site.fr;dbname=ma.base;charset=utf8', 'nom.user', 'm.d.p');
     } else {
       die('Site inconnu');
     }
 
-    // TODO Connection : changer en PDO
-    mysql_connect($host, $user, $pass) or die('pas de connexion');
-    mysql_select_db($bdd) or die('base de données non trouvée');
+    $dbh->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    return $dbh;
   }
 
 ?>
+

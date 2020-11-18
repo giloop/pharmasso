@@ -11,9 +11,9 @@
     <link rel="stylesheet" href="assets/css/main.css" />
     <script src="assets/js/jquery.min.js"></script>
   	<script src="assets/js/jquery.scrolly.min.js"></script>
-	  <script src="assets/js/skel.min.js"></script>
-	  <script src="assets/js/util.js"></script>
-	  <script src="assets/js/main.js"></script>
+	<script src="assets/js/skel.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
     <script src="assets/js/jquery-ui.min.js"></script>
     <script>
      $( function() {
@@ -39,9 +39,9 @@
     <!-- Formulaire -->
     <section>
       <h2>Ajouter un médicament</h2>
-      <p>Avant de choisir un nom d'utilisateur, vérifiez qu'il n'est pas déjà utilisé dans la liste des médicaments.</p>
-      <p>Il n'est pas nécessaire de remettre votre téléphone et/ou mail si vous l'avez rempli une fois.</p>
-      <p><span class="required">(*) Champs obligatoires</span></p>
+      <p>Avant de choisir un <b>nom d'utilisateur</b>, vérifiez qu'il n'est pas déjà utilisé dans la <a href="#pharmacie">liste des médicaments</a>.
+      <br/>Il n'est pas nécessaire de remettre votre téléphone et/ou mail si vous l'avez rempli une fois.
+      <br/><span class="required"><b>(*)</b> Champs obligatoires</span></p>
       <form id="ajout">
       <div class="row uniform 50%">
         <div class="6u 12u$(xsmall)">
@@ -89,7 +89,7 @@
         </div>
         <div class="12u$">
           <input type="submit" value="Ajouter" class="special"/>
-        </div>
+        </div></div>
       </form>
       <p id="result"> </p>
     </section>
@@ -97,13 +97,13 @@
     <!-- Table -->
     <section>
       <div class="inner">
-          <h2>Liste des médicaments disponibles</h2>
-          <?php afficherTableDiv(); ?>
+          <h2 id="pharmacie">Liste des médicaments disponibles</h2>
+          <div id="table-pharma"><?php afficherTableDiv(); ?></div>
       </div>
     </section>
 
     <section>
-      <header><h3><a href="index.php">Retour à l'accueil</h3></header>
+      <header><h3><a href="index.php">Retour à l'accueil</a></h3></header>
       <!-- Space before footer -->
       <p><br/><br/></p>
     </section>
@@ -154,16 +154,17 @@ $("#ajout").submit(function(event){
 
     // Callback handler that will be called on success
     request.done(function (response, textStatus, jqXHR){
-        // Log a message to the console
-        // console.log("Hooray, it worked!"+response);
-        $("#result").text("Yes : "+response);
+        // Debug message 
+		// $("#result").text("Ajout OK : "+response);
+		// TODO Update table text
+		$("#table-pharma").html(response);
     });
 
     // Callback handler that will be called on failure
     request.fail(function (jqXHR, textStatus, errorThrown){
         // Log the error to the console
         // console.error("The following error occurred: "+textStatus, errorThrown);
-        $("#result").text("The following error occurred: "+errorThrown);
+		$("#result").text("The following error occurred: "+errorThrown);
     });
 
     // Callback handler that will be called regardless

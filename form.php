@@ -5,6 +5,8 @@ include("functions.php");
 // through the global variable $_POST, like this:
 // On utilise les nom du formulaire
 $erreur = "";
+$tel = "";
+$mail = "";
 
 if($_SERVER["REQUEST_METHOD"] == "POST") {
 	if (empty($_POST["nom"])) {
@@ -50,9 +52,11 @@ if($_SERVER["REQUEST_METHOD"] == "POST") {
 if (empty($erreur)) {
 
 	// Les champs sont OK : ajout à la base 
-	echo "Champs reçus $nom, $med, $tel, $mail, $qtite, $mois/$annee";
 	ajouterPharma($nom, $med, $tel, $mail, $qtite, $mois.'/'.$annee);
-
+	// Debug: 
+	// echo "Champs reçus $nom, $med, $tel, $mail, $qtite, $mois/$annee";
+	// Mise à jour table-pharma
+	afficherTableDiv();
 } else {
 	echo "Erreur : ".$erreur;
 }
