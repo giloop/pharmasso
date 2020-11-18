@@ -1,0 +1,5 @@
+ErrorDocument 401 http://monsite.fr/accesrefuse.html
+PerlSetVar AuthFile .htpasswd
+AuthName "Acces Pharmasso"
+AuthType Basic
+require valid-user

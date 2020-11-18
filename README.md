@@ -12,9 +12,9 @@ Il s'agit d'un site simple en php pour  indiquer les médicaments que l'on a en 
 
 ## Mode d'emploi / Installation
 - Créer une base mysql, à l'aide du code ci-dessous (valable pour un site free.fr)
-- Ajouter les infos de connexion dans le fichier infos_bd.php
+- Ajouter les infos de connexion dans le fichier infos_bd.php (utiliser / renommer infos_bd.example.php)
 - Uploader l'ensemble dans un répertoire sur votre site. 
-- Comme il n'y a pas de compte utilisateur, il est recommandé de limiter l'accès au répertoire pour éviter les saisies indésirables.  
+- Comme il n'y a pas de compte utilisateur, il est recommandé de limiter l'accès au répertoire pour éviter les saisies indésirables (voir .htaccess.example)  
 
 ```sql
 --
